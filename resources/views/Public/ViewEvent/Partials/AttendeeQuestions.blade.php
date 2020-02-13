@@ -34,7 +34,11 @@
                 </div>
                 @endforeach
             @endif
-
+            @if ($question->description !== '')
+                <div>
+                    <p>{{$question->description}}</p>
+                </div>
+            @endif
         </div>
     </div>
 @endforeach

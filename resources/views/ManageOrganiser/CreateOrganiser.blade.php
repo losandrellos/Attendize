@@ -13,7 +13,7 @@
         }
     </style>
     <script>
-    @include('ManageOrganiser.Partials.OrganiserCreateAndEditJS')
+        @include('ManageOrganiser.Partials.OrganiserCreateAndEditJS')
     </script>
 
 @stop
@@ -74,13 +74,22 @@
                     </div>
 
                     <div id="tax_fields" class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <p class="control-label">{!! trans("Organiser.organiser_tax_included_prompt") !!}</p>
+                                {!! Form::label('Yes', 'Yes', array('class'=>'control-label', 'id' => 'tax_included_yes')) !!}
+                                {{ Form::radio('tax_included', '1' , true) }}
+                                {!! Form::label('No', 'No', array('class'=>'control-label','id' => 'tax_included_no')) !!}
+                                {{ Form::radio('tax_included', '0' , false) }}
+                            </div>
+                        </div>
                         <div class="col-md-6">
                             <div class="form-group">
                                 {!! Form::label('tax_id', trans("Organiser.organiser_tax_id"), array('class'=>'control-label required')) !!}
                                 {!! Form::text('tax_id', Input::old('tax_id'), array('class'=>'form-control', 'placeholder'=>'Tax ID'))  !!}
                             </div>
                         </div>
-                        
+
                         <div class="col-md-3">
                             <div class="form-group">
                                 {!! Form::label('tax_name', trans("Organiser.organiser_tax_name"), array('class'=>'control-label required')) !!}

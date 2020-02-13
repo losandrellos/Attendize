@@ -213,16 +213,99 @@ $(function() {
         });
     });
 
-    $('#is_business').click(function(e) {
+    // $('#is_business').click(function(e) {
+    //     var $isBusiness = $(this);
+    //     var isChecked = $isBusiness.hasClass('checked');
+    //
+    //     if (isChecked == undefined || isChecked === false) {
+    //         $isBusiness.addClass('checked');
+    //         $('#business_details').removeClass('hidden').show();
+    //     } else {
+    //         $isBusiness.removeClass('checked');
+    //         $('#business_details').addClass('hidden').hide();
+    //     }
+    // });
+
+    $('#radio_is_business').click(function(e) {
+        console.log("here i am");
         var $isBusiness = $(this);
+        var $isPrivate = $('#radio_is_private');
         var isChecked = $isBusiness.hasClass('checked');
 
         if (isChecked == undefined || isChecked === false) {
             $isBusiness.addClass('checked');
+            $isPrivate.removeClass('checked');
             $('#business_details').removeClass('hidden').show();
+            $('#private_details').addClass('hidden').hide();
         } else {
             $isBusiness.removeClass('checked');
+            $isPrivate.addClass('checked');
             $('#business_details').addClass('hidden').hide();
+            $('#private_details').removeClass('hidden').show();
+        }
+    });
+    $('#radio_is_private').click(function(e) {
+        var $isPrivate = $(this);
+        var $isBusiness = $('#radio_is_business');
+        var isChecked = $isPrivate.hasClass('checked');
+
+        if (isChecked == undefined || isChecked === false) {
+            $isBusiness.removeClass('checked');
+            $isPrivate.addClass('checked');
+            $('#business_details').addClass('hidden').hide();
+            $('#private_details').removeClass('hidden').show();
+        } else {
+            $isBusiness.addClass('checked');
+            $isPrivate.removeClass('checked');
+            $('#business_details').removeClass('hidden').show();
+            $('#private_details').addClass('hidden').hide();
+        }
+    });
+    $('#country_dropdown_id').on('change',function(e) {
+        // var $isPrivate = $(this);
+        var country_id = e.target.value;
+        if (country_id == 380) {
+            $('#pec_destination_code').removeClass('hidden').show();
+            $('#pec').setAttribute('required','required');
+            $('#destination_code').setAttribute('required','required');
+        } else {
+            $('#pec_destination_code').addClass('hidden').hide();
+            $('#pec').removeAttribute('required');
+            $('#destination_code').removeAttribute('required');
+        }
+    });
+    $('#radio_pec').click(function(e) {
+        var $pec = $(this);
+        var $destinationCode = $('#radio_destination_code');
+        var isChecked = $pec.hasClass('checked');
+
+        if (isChecked == undefined || isChecked === false) {
+            $pec.addClass('checked');
+            $destinationCode.removeClass('checked');
+            $('#pec').removeClass('hidden').show();
+            $('#destination_code').addClass('hidden').hide();
+        } else {
+            $pec.removeClass('checked');
+            $destinationCode.addClass('checked');
+            $('#pec').addClass('hidden').hide();
+            $('#destination_code').removeClass('hidden').show();
+        }
+    });
+    $('#radio_destination_code').click(function(e) {
+        var $destinationCode = $(this);
+        var $pec = $('#radio_pec');
+        var isChecked = $destinationCode.hasClass('checked');
+
+        if (isChecked == undefined || isChecked === false) {
+            $pec.removeClass('checked');
+            $destinationCode.addClass('checked');
+            $('#pec').addClass('hidden').hide();
+            $('#destination_code').removeClass('hidden').show();
+        } else {
+            $pec.addClass('checked');
+            $destinationCode.removeClass('checked');
+            $('#pec').removeClass('hidden').show();
+            $('#destination_code').addClass('hidden').hide();
         }
     });
 });

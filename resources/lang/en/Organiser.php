@@ -61,6 +61,7 @@ return array (
   'organiser_username_facebook_placeholder' => 'MyFacebookPage',
   'organiser_username_twitter_placeholder' => 'MyTwitterPage',
   'organiser_tax_prompt' => 'Do you want to charge tax as your events?',
+  'organiser_tax_included_prompt' => 'Should tax be included in ticket price?',
   'organiser_tax_id' => 'Tax ID',
   'organiser_tax_name' => 'Tax Name',
   'organiser_tax_value' => 'Tax Value',

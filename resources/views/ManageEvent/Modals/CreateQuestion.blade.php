@@ -29,6 +29,16 @@
                     ]) !!}
                 </div>
                 <div class="form-group">
+                    <label for="question-description">
+                        @lang("Question.question_description")
+                    </label>
+                    {!! Form::text('description', '', [
+                        'id' => 'question-description',
+                        'class' => 'form-control',
+                        'placeholder' => trans("Question.question_description_placeholder"),
+                    ]) !!}
+                </div>
+                <div class="form-group">
                     <label for="question-type">
                         @lang("Question.question_type")
                     </label>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Event;
 use App\Models\Ticket;
+use App\Models\Country;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Log;
@@ -76,8 +77,10 @@ class EventTicketsController extends MyBaseController
      */
     public function showCreateTicket($event_id)
     {
+
         return view('ManageEvent.Modals.CreateTicket', [
             'event' => Event::scope()->find($event_id),
+            'countries' => Country::get()
         ]);
     }
 

@@ -75,7 +75,6 @@ $factory->define(App\Models\Currency::class, function (Faker\Generator $faker) {
     ];
 });
 
-//TODO create country class so country_id can be populated
 $factory->define(App\Models\Account::class, function (Faker\Generator $faker) {
     return [
         'first_name'             => $faker->firstName,
@@ -93,7 +92,7 @@ $factory->define(App\Models\Account::class, function (Faker\Generator $faker) {
         'city'                   => $faker->city,
         'state'                  => $faker->stateAbbr,
         'postal_code'            => $faker->postcode,
-//        'country_id'             => factory(App\Models\Country::class)->create()->id,
+        'country_id'             => factory(App\Models\Country::class)->create()->id,
         'email_footer'           => 'Email footer text',
         'is_active'              => false,
         'is_banned'              => false,

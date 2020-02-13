@@ -7,6 +7,7 @@ use App\Models\Account;
 use App\Models\AccountPaymentGateway;
 use App\Models\Affiliate;
 use App\Models\Attendee;
+use App\Models\Country;
 use App\Models\Event;
 use App\Models\EventStats;
 use App\Models\Order;
@@ -200,6 +201,7 @@ class EventCheckoutController extends Controller
             'validation_messages'     => $validation_messages,
             'event_id'                => $event->id,
             'tickets'                 => $tickets,
+            'countries'                 => Country::get(),
             'total_ticket_quantity'   => $total_ticket_quantity,
             'order_started'           => time(),
             'expires'                 => $order_expires_time,
@@ -311,6 +313,7 @@ class EventCheckoutController extends Controller
                 'business_address_line1' => 'required',
                 'business_address_city' => 'required',
                 'business_address_code' => 'required',
+                'country_dropdown' => 'required',
             ];
 
             $businessMessages = [
@@ -319,6 +322,41 @@ class EventCheckoutController extends Controller
                 'business_address_line1.required' => 'Please enter a valid street address',
                 'business_address_city.required' => 'Please enter a valid city',
                 'business_address_code.required' => 'Please enter a valid code',
+                'country_dropdown.required' => 'Please select a valid country',
+            ];
+            if ($request->has('country_dropdown') && $request->get('country_dropdown') == 380
+                && $request->has('pec_destination_code')) {
+                if ($request->get('pec_destination_code')) {
+
+                    //pec
+                    $businessRules = $businessRules + ['pec' => ['required','email']];
+                    $businessMessages = $businessMessages + ['pec.required' => 'Please specify valid PEC'];
+                } else {
+                    $businessRules = $businessRules + ['destination_code' => 'required'];
+                    $businessMessages = $businessMessages + ['destination_code.required' => 'Please specify valid destination code'];
+
+                }
+            }
+            $order->rules = $order->rules + $businessRules;
+            $order->messages = $order->messages + $businessMessages;
+        } else if ($request->has('is_business') && $request->get('is_business')===false) {
+            // Dynamic validation on the new business fields, only gets validated if business selected
+            $businessRules = [
+                'private_business_name' => 'required',
+                'private_business_tax_number' => 'required',
+                'business_address_line1' => 'required',
+                'business_address_city' => 'required',
+                'business_address_code' => 'required',
+                'country_dropdown' => 'required',
+            ];
+
+            $businessMessages = [
+                'company_name.required' => 'Please enter a valid company name',
+                'private_tax_number.required' => 'Please enter a valid private tax identifier',
+                'business_address_line1.required' => 'Please enter a valid street address',
+                'business_address_city.required' => 'Please enter a valid city',
+                'business_address_code.required' => 'Please enter a valid code',
+                'country_dropdown.required' => 'Please select a valid country',
             ];
 
             $order->rules = $order->rules + $businessRules;
@@ -568,14 +606,25 @@ class EventCheckoutController extends Controller
                 $order->is_business = $request_data['is_business'];
                 $order->business_name = sanitise($request_data['business_name']);
                 $order->business_tax_number = sanitise($request_data['business_tax_number']);
-                $order->business_address_line_one = sanitise($request_data['business_address_line1']);
-                $order->business_address_line_two  = sanitise($request_data['business_address_line2']);
-                $order->business_address_state_province  = sanitise($request_data['business_address_state']);
-                $order->business_address_city = sanitise($request_data['business_address_city']);
-                $order->business_address_code = sanitise($request_data['business_address_code']);
-
+            } else if (isset($request_data['is_business']) && (bool)$request_data['is_business'] == false) {
+                $order->is_business = false;
+                $order->business_name = sanitise($request_data['private_business_name']);
+                $order->business_tax_number = sanitise($request_data['private_business_tax_number']);
             }
-
+            $order->business_address_line_one = sanitise($request_data['business_address_line1']);
+            $order->business_address_line_two  = sanitise($request_data['business_address_line2']);
+            $order->business_address_state_province  = sanitise($request_data['business_address_state']);
+            $order->business_address_city = sanitise($request_data['business_address_city']);
+            $order->business_address_code = sanitise($request_data['business_address_code']);
+            $order->country_id = $request_data['country_dropdown'];
+            if (isset($request_data['pec_destination_code']) && (bool)$request_data['pec_destination_code'] &&
+            isset($request_data['pec'])) {
+                $order->business_einvoice_identifier_type = 'pec';
+                $order->business_einvoice_identifier = $request_data['pec'];
+            } else if (isset($request_data['destination_code'])){
+                $order->business_einvoice_identifier_type = 'destination_code';
+                $order->business_einvoice_identifier = $request_data['destination_code'];
+            }
             // Calculating grand total including tax
             $orderService = new OrderService($ticket_order['order_total'], $ticket_order['total_booking_fee'], $event);
             $orderService->calculateFinalCosts();
