@@ -227,7 +227,6 @@ $(function() {
     // });
 
     $('#radio_is_business').click(function(e) {
-        console.log("here i am");
         var $isBusiness = $(this);
         var $isPrivate = $('#radio_is_private');
         var isChecked = $isBusiness.hasClass('checked');
@@ -265,9 +264,13 @@ $(function() {
         // var $isPrivate = $(this);
         var country_id = e.target.value;
         if (country_id == 380) {
-            $('#pec_destination_code').removeClass('hidden').show();
-            $('#pec').setAttribute('required','required');
-            $('#destination_code').setAttribute('required','required');
+            var $isBusiness = $('#radio_is_business');
+            var isChecked = $isBusiness.hasClass('checked');
+            if (isChecked === true) {
+                $('#pec_destination_code').removeClass('hidden').show();
+                $('#pec').setAttribute('required','required');
+                $('#destination_code').setAttribute('required','required');
+            }
         } else {
             $('#pec_destination_code').addClass('hidden').hide();
             $('#pec').removeAttribute('required');
