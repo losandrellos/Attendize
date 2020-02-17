@@ -21,7 +21,7 @@ return [
   'radio_is_private' => 'No, bill to a private customer',
   'business_name' => 'Business Name',
   'business_tax_number' => 'Business Tax Number',
-  'private_business_name' => 'Company Name',
+  'private_business_name' => 'Business Name',
   'private_business_tax_number' => 'Private Tax Number',
   'business_address' => 'Business Address',
   'business_address_line1' => 'Line 1',

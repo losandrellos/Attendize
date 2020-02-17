@@ -15,8 +15,8 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div onclick="window.location='{{$event->event_url}}#organiser'" class="event_organizer">
-                    <b>{{$event->organiser->name}}</b> @lang("Public_ViewEvent.presents")
+                <div class="event_organizer">
+                    <a href="https://www.esteco.com/">...back to the <b>{{$event->organiser->name}}</b> website</a>
                 </div>
             </div>
         </div>
@@ -45,7 +45,7 @@
                 </span>
             </div>
 
-            <div class="event_buttons">
+            <div class="event_buttons" style="display: none">
                 <div class="row">
                     <div class="col-md-4 col-sm-4">
                         <a class="btn btn-event-link btn-lg" href="{{{$event->event_url}}}#tickets">@lang("Public_ViewEvent.TICKETS")</a>
