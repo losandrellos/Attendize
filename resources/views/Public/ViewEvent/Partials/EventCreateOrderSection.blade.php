@@ -96,7 +96,7 @@
                         <div class="form-group">
                             {!! Form::label('is_business', trans("Public_ViewEvent.is_business"), ['class' => 'control-label']) !!}
                             <div class="custom-radio">
-                                {!! Form::radio("is_business", true, true, ['id' => 'radio_is_business']) !!}
+                                {!! Form::radio("is_business", true, true, ['id' => 'radio_is_business', 'class' => 'checked']) !!}
                                 {!! Form::label('radio_is_business', trans("Public_ViewEvent.radio_is_business"), ['class' => 'control-label']) !!}
                             </div>
                             <div class="custom-radio">
