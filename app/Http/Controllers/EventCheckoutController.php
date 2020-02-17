@@ -351,7 +351,7 @@ class EventCheckoutController extends Controller
             ];
 
             $businessMessages = [
-                'company_name.required' => 'Please enter a valid company name',
+                'private_business_name.required' => 'Please enter a valid business name',
                 'private_tax_number.required' => 'Please enter a valid private tax identifier',
                 'business_address_line1.required' => 'Please enter a valid street address',
                 'business_address_city.required' => 'Please enter a valid city',
