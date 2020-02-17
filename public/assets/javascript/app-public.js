@@ -236,11 +236,13 @@ $(function() {
             $isPrivate.removeClass('checked');
             $('#business_details').removeClass('hidden').show();
             $('#private_details').addClass('hidden').hide();
+            evaluatePecDestCode();
         } else {
             $isBusiness.removeClass('checked');
             $isPrivate.addClass('checked');
             $('#business_details').addClass('hidden').hide();
             $('#private_details').removeClass('hidden').show();
+            resetPecDestCode();
         }
     });
     $('#radio_is_private').click(function(e) {
@@ -253,11 +255,13 @@ $(function() {
             $isPrivate.addClass('checked');
             $('#business_details').addClass('hidden').hide();
             $('#private_details').removeClass('hidden').show();
+            resetPecDestCode();
         } else {
             $isBusiness.addClass('checked');
             $isPrivate.removeClass('checked');
             $('#business_details').removeClass('hidden').show();
             $('#private_details').addClass('hidden').hide();
+            evaluatePecDestCode();
         }
     });
     $('#country_dropdown_id').on('change',function(e) {
@@ -268,13 +272,13 @@ $(function() {
             var isChecked = $isBusiness.hasClass('checked');
             if (isChecked === true) {
                 $('#pec_destination_code').removeClass('hidden').show();
-                $('#pec').setAttribute('required','required');
-                $('#destination_code').setAttribute('required','required');
+                // $('#pec').setAttribute('required','required');
+                // $('#destination_code').setAttribute('required','required');
+            } else {
+                resetPecDestCode();
             }
         } else {
-            $('#pec_destination_code').addClass('hidden').hide();
-            $('#pec').removeAttribute('required');
-            $('#destination_code').removeAttribute('required');
+            resetPecDestCode();
         }
     });
     $('#radio_pec').click(function(e) {
@@ -312,6 +316,29 @@ $(function() {
         }
     });
 });
+
+function resetPecDestCode() {
+    $('#pec_destination_code').addClass('hidden').hide();
+    // $('#pec').removeAttribute('required');
+    // $('#destination_code').removeAttribute('required');
+}
+function evaluatePecDestCode() {
+    var country_id = $("country_dropdown_id").value;
+    if (country_id == 380) {
+        var $isBusiness = $('#radio_is_business');
+        var isChecked = $isBusiness.hasClass('checked');
+        if (isChecked === true) {
+            $('#pec_destination_code').removeClass('hidden').show();
+            // $('#pec').setAttribute('required','required');
+            // $('#destination_code').setAttribute('required','required');
+        } else {
+            resetPecDestCode();
+        }
+    } else {
+        resetPecDestCode();
+    }
+
+}
 
 function processFormErrors($form, errors)
 {
