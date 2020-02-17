@@ -33,6 +33,7 @@
           <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
         @yield('head')
+        <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
 
        {!!HTML::style('assets/stylesheet/frontend.css')!!}
 

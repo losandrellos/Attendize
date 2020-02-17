@@ -17,6 +17,7 @@
     <link rel="icon" type="image/png" sizes="96x96" href="{{ asset("assets/images/touch/favicon-96x96.png") }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset("assets/images/touch/favicon-16x16.png") }}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{ asset("assets/images/touch/favicon-32x32.png") }}">
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="{{ url("assets/images/touch/mstile-144x144.png") }}">
     <meta name="msapplication-config" content="{{ url("assets/images/touch/browserconfig.xml") }}">

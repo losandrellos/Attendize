@@ -32,6 +32,7 @@
 
        {!!HTML::style('assets/stylesheet/frontend.css')!!}
         @yield('head')
+        <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
     </head>
     <body class="attendize">
         @include('Shared.Partials.FacebookSdk')

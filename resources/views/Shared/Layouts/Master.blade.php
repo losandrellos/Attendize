@@ -29,6 +29,7 @@
     <!--Style-->
     {!! HTML::style(config('attendize.cdn_url_static_assets').'/assets/stylesheet/application.css') !!}
     <!--/Style-->
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700' rel='stylesheet' type='text/css'>
 
     @yield('head')
 </head>
