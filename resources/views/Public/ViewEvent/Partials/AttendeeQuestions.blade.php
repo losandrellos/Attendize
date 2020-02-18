@@ -1,8 +1,7 @@
 @foreach($ticket->questions->where('is_enabled', 1)->sortBy('sort_order') as $question)
-    <div class="col-md-12">
+    <div class="col-md-12 {{ $question->question_show_if > 0 ? 'hidden question_show_if question_show_if': '' }}" id="{{md5('ticket_holder_questions'.$ticket->id.'.'.$i.'.'.$question->id)}}">
         <div class="form-group">
             {!! Form::label("ticket_holder_questions[{$ticket->id}][{$i}][$question->id]", $question->title, ['class' => $question->is_required ? 'required' : '']) !!}
-
             @if($question->question_type_id == config('attendize.question_textbox_single'))
                 {!! Form::text("ticket_holder_questions[{$ticket->id}][{$i}][$question->id]", null, [$question->is_required ? 'required' : '' => $question->is_required ? 'required' : '', 'class' => "ticket_holder_questions.{$ticket->id}.{$i}.{$question->id}   form-control"]) !!}
             @elseif($question->question_type_id == config('attendize.question_textbox_multi'))
@@ -38,6 +37,11 @@
                 <div>
                     <p>{{$question->description}}</p>
                 </div>
+            @endif
+            @if ($question->question_show_if > 0 )
+                <span class="hidden show_if_md5">{{ md5($ticket->id.'0'.$question->question_show_if.'Yes') }}</span>
+                <span class="hidden hide_if_md5">{{ md5($ticket->id.'0'.$question->question_show_if.'No') }}</span>
+                <span class="hidden show_if_question_id">{{ $question->question_show_if }}</span>
             @endif
         </div>
     </div>

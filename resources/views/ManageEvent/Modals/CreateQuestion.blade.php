@@ -39,6 +39,16 @@
                     ]) !!}
                 </div>
                 <div class="form-group">
+                    <label for="question-show-if">
+                        @lang("Question.question_show_if")
+                    </label>
+                    {!! Form::text('question_show_if', '', [
+                        'id' => 'question-show-if',
+                        'class' => 'form-control',
+                        'placeholder' => trans("Question.question_show_if_placeholder"),
+                    ]) !!}
+                </div>
+                <div class="form-group">
                     <label for="question-type">
                         @lang("Question.question_type")
                     </label>

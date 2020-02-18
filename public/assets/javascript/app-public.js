@@ -313,6 +313,36 @@ $(function() {
             $('#destination_code').addClass('hidden').hide();
         }
     });
+    $('.question_show_if').each(function (i) {
+        console.log('here I am');
+        var id = $('.question_show_if')[i].id;
+        var showId = $('#'+id+' .show_if_md5').text();
+        var hideId = $('#'+id+' .hide_if_md5').text();
+        console.log(id, showId, hideId);
+        $('#'+showId).click(function (e) {
+            $('#'+id).removeClass('hidden');
+        });
+        $('#'+hideId).click(function (e) {
+            $('#'+id).addClass('hidden');
+        });
+    });
+    $('#radio_destination_code').click(function(e) {
+        var $destinationCode = $(this);
+        var $pec = $('#radio_pec');
+        var isChecked = $destinationCode.hasClass('checked');
+
+        if (isChecked == undefined || isChecked === false) {
+            $pec.removeClass('checked');
+            $destinationCode.addClass('checked');
+            $('#pec').addClass('hidden').hide();
+            $('#destination_code').removeClass('hidden').show();
+        } else {
+            $pec.addClass('checked');
+            $destinationCode.removeClass('checked');
+            $('#pec').removeClass('hidden').show();
+            $('#destination_code').addClass('hidden').hide();
+        }
+    });
 });
 
 function resetPecDestCode() {

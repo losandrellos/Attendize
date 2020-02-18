@@ -18,9 +18,11 @@ return array (
   'no_questions_yet_text' => 'Here you can add questions which attendees will be asked to answer during the check-out process.',
   'question' => 'Question',
   'question_description' => 'Description',
+  'question_show_if' => 'Show If',
   'question_options' => 'Question Options',
   'question_placeholder' => 'e.g. Please enter your full address?',
   'question_description_placeholder' => 'An optional long description that appears below the question',
+  'question_show_if_placeholder' => 'An optional question id to show this only if that is Yes',
   'question_type' => 'Question Type',
   'require_this_question_for_ticket(s)' => 'Require this question for ticket(s)',
 );
