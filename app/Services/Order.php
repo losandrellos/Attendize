@@ -116,7 +116,11 @@ class Order
      * @return string
      */
     public function getVatFormattedInBrackets() {
-        return "(+" . $this->getTaxAmount(true) . " " . $this->event->organiser->tax_name . ")";
+        $prefix = "+";
+        if ($this->event->organiser->tax_included) {
+            $prefix = "inc.";
+        }
+        return "(".$prefix . $this->getTaxAmount(true) . " " . $this->event->organiser->tax_name . ")";
     }
-    
+
 }

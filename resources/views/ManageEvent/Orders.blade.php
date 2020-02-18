@@ -115,7 +115,11 @@
                             </td>
                             <td>
                                 <a href="#" class="hint--top" data-hint="{{money($order->amount, $event->currency)}} + {{money($order->organiser_booking_fee, $event->currency)}} @lang("Order.organiser_booking_fees")">
-                                    {{money($order->amount + $order->organiser_booking_fee + $order->taxamt, $event->currency)}}
+                                    @if($organiser->tax_included)
+                                        {{money($order->amount + $order->organiser_booking_fee, $event->currency)}}
+                                    @else
+                                        {{money($order->amount + $order->organiser_booking_fee + $order->taxamt, $event->currency)}}
+                                    @endif
                                     @if($order->is_refunded || $order->is_partially_refunded)
 
                                     @endif

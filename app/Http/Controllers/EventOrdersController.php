@@ -8,6 +8,7 @@ use App\Models\Attendee;
 use App\Models\Event;
 use App\Models\EventStats;
 use App\Models\Order;
+use App\Models\Organiser;
 use App\Models\PaymentGateway;
 use App\Services\Order as OrderService;
 use Services\PaymentGateway\Factory as PaymentGatewayFactory;
@@ -38,6 +39,7 @@ class EventOrdersController extends MyBaseController
         $sort_order = $request->get('sort_order') == 'asc' ? 'asc' : 'desc';
 
         $event = Event::scope()->find($event_id);
+        $organiser = Organiser::scope()->find($event->organiser_id);
 
         if ($searchQuery) {
             /*
@@ -64,6 +66,7 @@ class EventOrdersController extends MyBaseController
         $data = [
             'orders'     => $orders,
             'event'      => $event,
+            'organiser'  => $organiser,
             'sort_by'    => $sort_by,
             'sort_order' => $sort_order,
             'q'          => $searchQuery ? $searchQuery : '',
