@@ -20,7 +20,11 @@ class OrderMailer
         ];
 
         Mail::send('Emails.OrderNotification', $data, function ($message) use ($order) {
-            $message->to($order->account->email);
+            if ($order->event->notification_order_address !== '') {
+                $message->to($order->event->notification_order_address);
+            } else {
+                $message->to($order->account->email);
+            }
             $message->subject(trans("Controllers.new_order_received", ["event"=> $order->event->title, "order" => $order->order_reference]));
         });
 

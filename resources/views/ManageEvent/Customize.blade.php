@@ -494,6 +494,13 @@
                             @lang("Order.after_order_help")
                         </div>
                     </div>
+                    <div class="form-group">
+                        {!! Form::label('notification_order_address', trans("Order.notification_order_address"), array('class'=>'control-label ')) !!}
+
+                        {!!  Form::text('notification_order_address', $event->notification_order_address, [
+                            'class' => 'form-control'
+                        ])  !!}
+                    </div>
 
 
                         <h4>@lang("Order.offline_payment_settings")</h4>

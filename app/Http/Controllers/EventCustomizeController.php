@@ -226,6 +226,7 @@ class EventCustomizeController extends MyBaseController
 
         $event->pre_order_display_message = trim($request->get('pre_order_display_message'));
         $event->post_order_display_message = trim($request->get('post_order_display_message'));
+        $event->notification_order_address = trim($request->get('notification_order_address'));
         $event->offline_payment_instructions = trim($request->get('offline_payment_instructions'));
         $event->enable_offline_payments = (int)$request->get('enable_offline_payments');
         $event->save();

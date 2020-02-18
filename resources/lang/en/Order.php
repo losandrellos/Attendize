@@ -6,6 +6,7 @@ return array (
   'partially_refunded' => 'partially refunded',
   'after_order' => 'Message to display to attendees after they have completed their order.',
   'after_order_help' => 'This message will be displayed to attendees once they have successfully completed the checkout process.',
+  'notification_order_address' => 'Send order notification to',
   'amount' => 'Amount',
   'arrived' => 'Arrived',
   'attendee_cancelled' => 'Cancelled',
